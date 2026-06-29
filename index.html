@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuneRide — Music Lessons, On Demand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --black-soft: #0a0a0a;
+            --black-card: #141414;
+            --beige: #f6f0e8;
+            --beige-dark: #e8dfd4;
+            --beige-muted: #c4b9ab;
+            --white: #ffffff;
+            --gray-600: #6b6b6b;
+            --gray-400: #999999;
+            --font: 'DM Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--beige);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--black);
+            border-bottom: 1px solid rgba(246, 240, 232, 0.08);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--beige);
+            letter-spacing: -0.03em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--beige-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--beige);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-login {
+            color: var(--beige);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-login:hover {
+            background: rgba(246, 240, 232, 0.06);
+        }
+
+        .nav-cta {
+            background: var(--beige);
+            color: var(--black);
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--beige-dark);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2.5rem 4rem;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--beige);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--beige-muted);
+            max-width: 440px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 440px;
+        }
+
+        .hero-input {
+            flex: 1;
+            background: var(--black-card);
+            border: 1px solid rgba(246, 240, 232, 0.12);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            color: var(--beige);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .hero-input::placeholder {
+            color: var(--gray-600);
+        }
+
+        .hero-input:focus {
+            border-color: rgba(246, 240, 232, 0.3);
+        }
+
+        .hero-btn {
+            background: var(--beige);
+            color: var(--black);
+            border: none;
+            padding: 1rem 1.8rem;
+            border-radius: 10px;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .hero-btn:hover {
+            background: var(--beige-dark);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 520px;
+            background: var(--black-card);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-card-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 85%;
+        }
+
+        .teacher-card {
+            background: rgba(246, 240, 232, 0.04);
+            border: 1px solid rgba(246, 240, 232, 0.08);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .teacher-card:hover {
+            background: rgba(246, 240, 232, 0.07);
+            border-color: rgba(246, 240, 232, 0.15);
+        }
+
+        .teacher-card.highlighted {
+            border-color: rgba(246, 240, 232, 0.2);
+            background: rgba(246, 240, 232, 0.06);
+        }
+
+        .teacher-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--black);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .teacher-info {
+            flex: 1;
+        }
+
+        .teacher-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .teacher-detail {
+            font-size: 0.8rem;
+            color: var(--beige-muted);
+        }
+
+        .teacher-meta {
+            text-align: right;
+        }
+
+        .teacher-eta {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .teacher-rating {
+            font-size: 0.75rem;
+            color: var(--beige-muted);
+        }
+
+        /* Section utility */
+        .section {
+            padding: 7rem 2.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-beige {
+            background: var(--beige);
+            color: var(--black);
+            max-width: none;
+            padding: 7rem 2.5rem;
+        }
+
+        .section-beige .section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .section-heading {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: var(--beige-muted);
+            max-width: 520px;
+            line-height: 1.6;
+        }
+
+        .section-beige .section-sub {
+            color: var(--gray-600);
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            background: var(--black-card);
+            border: 1px solid rgba(246, 240, 232, 0.06);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            transition: border-color 0.3s;
+        }
+
+        .step:hover {
+            border-color: rgba(246, 240, 232, 0.15);
+        }
+
+        .step-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--beige);
+            opacity: 0.15;
+            margin-bottom: 1.5rem;
+            line-height: 1;
+        }
+
+        .step h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--beige-muted);
+            line-height: 1.6;
+        }
+
+        /* For Teachers (beige section) */
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .earnings-card {
+            background: var(--black);
+            border-radius: 16px;
+            padding: 2.5rem;
+            color: var(--beige);
+        }
+
+        .earnings-top-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--beige-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .earnings-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.3rem;
+        }
+
+        .earnings-detail {
+            font-size: 0.9rem;
+            color: var(--beige-muted);
+            margin-bottom: 2rem;
+        }
+
+        .earnings-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--beige-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .earnings-bar {
+            height: 6px;
+            background: rgba(246, 240, 232, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .earnings-bar-fill {
+            height: 100%;
+            width: 85%;
+            background: var(--beige);
+            border-radius: 3px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .benefits-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--black);
+            border-radius: 50%;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .section-beige .benefits-list li::before {
+            background: var(--black);
+        }
+
+        /* For Students (dark section) */
+        .students-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .instruments-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .instrument-tag {
+            background: var(--black-card);
+            border: 1px solid rgba(246, 240, 232, 0.08);
+            border-radius: 10px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .instrument-tag:hover {
+            border-color: rgba(246, 240, 232, 0.2);
+            background: rgba(246, 240, 232, 0.04);
+        }
+
+        .instrument-tag .icon {
+            display: block;
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .dark-benefits-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .dark-benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--beige-muted);
+            line-height: 1.5;
+        }
+
+        .dark-benefits-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--beige);
+            border-radius: 50%;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Testimonials */
+        .testimonials-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: rgba(246, 240, 232, 0.03);
+            border: 1px solid rgba(246, 240, 232, 0.06);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.3s;
+        }
+
+        .review-card:hover {
+            border-color: rgba(246, 240, 232, 0.15);
+        }
+
+        .review-stars {
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            color: var(--beige);
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: var(--beige-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .review-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--beige);
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .review-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .review-role {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 8rem 2.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(246, 240, 232, 0.06);
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.05rem;
+            color: var(--beige-muted);
+            max-width: 440px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .btn-beige {
+            background: var(--beige);
+            color: var(--black);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-beige:hover {
+            background: var(--beige-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--beige);
+            border: 1px solid rgba(246, 240, 232, 0.2);
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--beige);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2.5rem 2rem;
+            border-top: 1px solid rgba(246, 240, 232, 0.06);
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+        }
+
+        .footer-cols {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--beige-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-col a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.82rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--beige);
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(246, 240, 232, 0.04);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-visual { height: 380px; }
+            .steps { grid-template-columns: 1fr; max-width: 480px; }
+            .teachers-grid { grid-template-columns: 1fr; }
+            .students-grid { grid-template-columns: 1fr; }
+            .testimonials-strip { grid-template-columns: 1fr; max-width: 480px; }
+            .footer-inner { flex-direction: column; }
+            .footer-cols { gap: 2rem; flex-wrap: wrap; }
+            .footer-bottom { flex-direction: column; gap: 0.4rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-form { flex-direction: column; }
+            .instruments-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-row { flex-direction: column; align-items: center; }
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-left">
+            <div class="nav-logo">TuneRide</div>
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#teach">Teach</a></li>
+                <li><a href="#learn">Learn</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-login">Log in</a>
+            <button class="nav-cta">Sign up</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Go anywhere with music</h1>
+                <p>Request a private music teacher and they'll be at your door in minutes. Guitar, piano, violin, voice — any instrument, any level.</p>
+                <div class="hero-form">
+                    <input type="text" class="hero-input" placeholder="What do you want to learn?">
+                    <button class="hero-btn">Find a teacher</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card-stack">
+                    <div class="teacher-card highlighted">
+                        <div class="teacher-avatar">SK</div>
+                        <div class="teacher-info">
+                            <div class="teacher-name">Sarah Kim</div>
+                            <div class="teacher-detail">Piano · 12 yrs experience</div>
+                        </div>
+                        <div class="teacher-meta">
+                            <div class="teacher-eta">8 min</div>
+                            <div class="teacher-rating">4.98 ★</div>
+                        </div>
+                    </div>
+                    <div class="teacher-card">
+                        <div class="teacher-avatar">JM</div>
+                        <div class="teacher-info">
+                            <div class="teacher-name">James Moreno</div>
+                            <div class="teacher-detail">Guitar · Berklee grad</div>
+                        </div>
+                        <div class="teacher-meta">
+                            <div class="teacher-eta">14 min</div>
+                            <div class="teacher-rating">4.95 ★</div>
+                        </div>
+                    </div>
+                    <div class="teacher-card">
+                        <div class="teacher-avatar">LP</div>
+                        <div class="teacher-info">
+                            <div class="teacher-name">Lisa Park</div>
+                            <div class="teacher-detail">Violin · Juilliard alum</div>
+                        </div>
+                        <div class="teacher-meta">
+                            <div class="teacher-eta">11 min</div>
+                            <div class="teacher-rating">4.97 ★</div>
+                        </div>
+                    </div>
+                    <div class="teacher-card">
+                        <div class="teacher-avatar">DW</div>
+                        <div class="teacher-info">
+                            <div class="teacher-name">David Wright</div>
+                            <div class="teacher-detail">Voice · Broadway coach</div>
+                        </div>
+                        <div class="teacher-meta">
+                            <div class="teacher-eta">6 min</div>
+                            <div class="teacher-rating">4.99 ★</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" id="how-it-works">
+        <div class="reveal">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-heading">Three taps to your first lesson</h2>
+            <p class="section-sub">No searching, no scheduling headaches. We match you with a vetted teacher nearby — instantly.</p>
+        </div>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-num">1</div>
+                <h3>Choose your instrument</h3>
+                <p>Tell us what you want to learn and your current level. We handle the rest.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-num">2</div>
+                <h3>Get matched</h3>
+                <p>See available teachers nearby — their background, specialties, reviews, and ETA.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-num">3</div>
+                <h3>Start playing</h3>
+                <p>Your teacher arrives at your door or connects virtually. Pay per lesson, no strings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Teachers -->
+    <section class="section-beige" id="teach">
+        <div class="section-inner">
+            <div class="reveal">
+                <div class="section-label">For Teachers</div>
+                <h2 class="section-heading">Earn on your schedule</h2>
+                <p class="section-sub" style="color: var(--gray-600);">Set your own rates. Accept lessons when you want. Keep 85% of every booking. No studio overhead.</p>
+            </div>
+            <div class="teachers-grid">
+                <div class="earnings-card reveal">
+                    <div class="earnings-top-label">This week</div>
+                    <div class="earnings-value">$1,240</div>
+                    <div class="earnings-detail">14 lessons · 18.5 hours</div>
+                    <div class="earnings-bar-label">
+                        <span>You keep</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="earnings-bar">
+                        <div class="earnings-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <ul class="benefits-list">
+                        <li>Set your own hourly rate — no caps, no minimums</li>
+                        <li>Accept or decline every request. You're always in control</li>
+                        <li>Build a repeat student base with loyalty tools</li>
+                        <li>Weekly direct deposit to your bank</li>
+                        <li>Free background check and profile verification</li>
+                        <li>$0 to join. Start earning in 48 hours</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Students -->
+    <section class="section" id="learn">
+        <div class="reveal">
+            <div class="section-label">For Students</div>
+            <h2 class="section-heading">Any instrument. Any level.</h2>
+            <p class="section-sub">From your first chord to conservatory prep — there's a teacher for you, available today.</p>
+        </div>
+        <div class="students-grid">
+            <div class="reveal">
+                <ul class="dark-benefits-list">
+                    <li>Lessons from $25. No subscriptions, no hidden fees</li>
+                    <li>Every teacher is background-checked and peer-reviewed</li>
+                    <li>In-home, at a studio, or virtual — you pick</li>
+                    <li>Cancel free up to 2 hours before</li>
+                    <li>Progress tracking and practice plans after each session</li>
+                    <li>First lesson satisfaction guaranteed</li>
+                </ul>
+            </div>
+            <div class="instruments-grid reveal">
+                <div class="instrument-tag"><span class="icon">🎹</span>Piano</div>
+                <div class="instrument-tag"><span class="icon">🎸</span>Guitar</div>
+                <div class="instrument-tag"><span class="icon">🎻</span>Violin</div>
+                <div class="instrument-tag"><span class="icon">🎷</span>Saxophone</div>
+                <div class="instrument-tag"><span class="icon">🥁</span>Drums</div>
+                <div class="instrument-tag"><span class="icon">🎤</span>Voice</div>
+                <div class="instrument-tag"><span class="icon">🎺</span>Trumpet</div>
+                <div class="instrument-tag"><span class="icon">🪕</span>Banjo</div>
+                <div class="instrument-tag"><span class="icon">🪈</span>Flute</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="reviews">
+        <div class="reveal">
+            <div class="section-label">Reviews</div>
+            <h2 class="section-heading">What people are saying</h2>
+        </div>
+        <div class="testimonials-strip">
+            <div class="review-card reveal">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"I'd wanted piano lessons for years but couldn't commit to a fixed slot. TuneRide changed that — I book when I'm free. Learned more in 3 months than a year of YouTube."</p>
+                <div class="review-author">
+                    <div class="review-avatar">MR</div>
+                    <div>
+                        <div class="review-name">Marcus Rivera</div>
+                        <div class="review-role">Piano student</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card reveal">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Replaced my studio gig with TuneRide. Earning 40% more with total flexibility. I teach who I want, when I want."</p>
+                <div class="review-author">
+                    <div class="review-avatar">JK</div>
+                    <div>
+                        <div class="review-name">James Kim</div>
+                        <div class="review-role">Guitar instructor</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card reveal">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"My daughter's violin teacher comes to our house. No more rushing across town after school. Absolute game changer for busy parents."</p>
+                <div class="review-author">
+                    <div class="review-avatar">AP</div>
+                    <div>
+                        <div class="review-name">Aisha Patel</div>
+                        <div class="review-role">Parent</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="reveal">
+            <h2>Ready to start?</h2>
+            <p>Join thousands making music happen — on demand, on their terms.</p>
+            <div class="cta-row">
+                <a href="#" class="btn-beige">Find a teacher</a>
+                <a href="#" class="btn-outline">Apply to teach</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">TuneRide</div>
+                <p class="footer-tagline">Music lessons, on demand.</p>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <h4>Students</h4>
+                    <ul>
+                        <li><a href="#">Find a teacher</a></li>
+                        <li><a href="#">Instruments</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Gift lessons</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Teachers</h4>
+                    <ul>
+                        <li><a href="#">Sign up to teach</a></li>
+                        <li><a href="#">Earnings</a></li>
+                        <li><a href="#">Requirements</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 TuneRide, Inc.</span>
+            <span>Privacy · Terms · Accessibility</span>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
